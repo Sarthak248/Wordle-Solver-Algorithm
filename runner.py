@@ -1,4 +1,5 @@
 import algo
+from pathlib import Path
 
 def print_menu():
     print("This program helps you solve wordle by using your input and only displaying the words that are possible")
@@ -11,12 +12,12 @@ def print_menu():
 
 def run_game():
     # Running Menu and Algo.py
-    file = open("allwords.txt", "r")
-    text = file.read()
+    path = Path(__file__).resolve().parent / "allwords.txt"
+    with open(path, "r", encoding="utf-8") as file:
+        text = file.read()
     words = text.splitlines()
     print_menu()
     user_quit = algo.play_game(words)
-
 
     while not user_quit:
         ans = input("Do you want to continue")
@@ -27,4 +28,3 @@ def run_game():
             break
 
 run_game()
-    
